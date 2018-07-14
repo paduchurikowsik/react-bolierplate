@@ -29,5 +29,6 @@ type Query{
 type Mutation{
     addAbout (name:String!, about: String! ): About
     signupUser( fullname: String!, password: String!, email: String! ): Token
+    signinUser( password: String!, email: String! ): Token
 }
 `;
