@@ -12,6 +12,13 @@ exports.resolvers = {
             const oneAbout = await About.findOne();
             return oneAbout;
         },
+        getPromotion: async (root, { _id }, { currentUser, Promotion }) => {
+            if (!currentUser) {
+                return null;
+            }
+            const promotion = await Promotion.findOne({ _id });
+            return promotion;
+        },
         getCurrentUser: async (root, args, { currentUser, User }) => {
             if (!currentUser) {
                 return null;
@@ -23,17 +30,43 @@ exports.resolvers = {
                     model: 'Role'
                 });
 
-                return user;
+            return user;
+        },
+        getAllPromotions: async (root, args, { currentUser, Promotion }) => {
+            if (!currentUser) {
+                return null;
+            }
+
+            const allPromotions = await Promotion.find();
+            return allPromotions;
+
+
         }
     },
     Mutation: {
-        addAbout: async (root, { name, about }, { About }) => {
+        addAbout: async (root, { name, about }, { currentUser, About }) => {
+            if (!currentUser) {
+                return null;
+            }
             const newAbout = await new About({
                 name,
                 about
             }).save();
 
             return newAbout;
+        },
+        addPromotion: async (root, { name, description, startDate, endDate }, { currentUser, Promotion }) => {
+            if (!currentUser) {
+                return null;
+            }
+            const newPromotion = await new Promotion({
+                name,
+                description,
+                startDate,
+                endDate
+            }).save();
+
+            return newPromotion;
         },
         signupUser: async (root, { fullname, email, password }, { User }) => {
             const user = await User.findOne({ email });

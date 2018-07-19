@@ -4,11 +4,11 @@ const Schema = mongoose.Schema;
 const AboutSchema = new Schema({
     name: {
         type: String,
-        requried: true
+        required: true
     },
     about: {
         type: String,
-        requried: true
+        required: true
     },
     createdDate: {
         type: Date,

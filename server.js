@@ -8,6 +8,7 @@ require('dotenv').config({ path: 'variables.env' });
 const Role = require('./models/Role');
 const User = require('./models/User');
 const About = require('./models/About');
+const Promotion = require('./models/Promotion');
 
 const { graphiqlExpress, graphqlExpress } = require('apollo-server-express');
 const { makeExecutableSchema } = require('graphql-tools');
@@ -52,6 +53,7 @@ app.use('/graphql', bodyParser.json(), graphqlExpress(({ currentUser }) => ({
         Role,
         User,
         About,
+        Promotion,
         currentUser
     }
 })

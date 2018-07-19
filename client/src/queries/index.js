@@ -10,6 +10,39 @@ query{
     }
 }
 `;
+export const GET_ALL_PROMOTIONS = gql`
+query{
+  getAllPromotions {
+        _id
+        name
+        description
+        startDate
+        endDate
+    }
+}
+`;
+
+
+export const GET_PROMOTION = gql`
+query($_id:ID!){
+  getPromotion(_id:$_id) {
+        _id
+        name
+        description
+        startDate
+        endDate
+    }
+}
+`;
+
+export const GET_CURRENT_USER = gql`
+query{
+  getCurrentUser {
+      fullname
+      email
+  }
+}
+`;
 
 // mutation
 export const SIGNUP_USER = gql`
@@ -28,11 +61,3 @@ mutation ($email: String!, $password: String!) {
   }
 `;
 
-export const GET_CURRENT_USER = gql`
-query{
-  getCurrentUser {
-      fullname
-      email
-  }
-}
-`;

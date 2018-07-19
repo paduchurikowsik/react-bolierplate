@@ -21,6 +21,7 @@ const NavbarAuth = ({ session }) => (
         <ul>
             <li><NavLink to="/" exact>Home</NavLink></li>
             <li><NavLink to="/profile">Profile</NavLink></li>
+            <li><NavLink to="/promotions">Promotions</NavLink></li>
             <Signout />
         </ul>
         <h4>Welcome, {session.getCurrentUser.fullname}</h4>

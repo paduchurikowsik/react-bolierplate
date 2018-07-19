@@ -13,6 +13,9 @@ import Signup from './components/Auth/Signup';
 import withSession from './components/withSession';
 import Navbar from './components/Navbar';
 import Profile from './components/Profile/Profile';
+import Promotion from './components/Promotion/Promotion';
+import AddPromotion from './components/Promotion/AddPromotion';
+import PromotionPage from './components/Promotion/PromotionPage';
 
 const client = new ApolloClient({
     uri: 'http://localhost:4444/graphql',
@@ -47,6 +50,9 @@ const Root = ({ refetch, session }) => (
                 <Route path="/signin" render={() => <Signin refetch={refetch} />} />
                 <Route path="/signup" render={() => <Signup refetch={refetch} />} />
                 <Route path="/profile" component={Profile} />
+                <Route path="/promotions" exact component={Promotion} />
+                <Route path="/promotions/add" component={AddPromotion} />
+                <Route path="/promotions/:_id" component={PromotionPage} />
                 <Redirect to="/" />
             </Switch>
         </Fragment>

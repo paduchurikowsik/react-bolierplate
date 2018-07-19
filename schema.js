@@ -7,15 +7,25 @@ type User{
     joinedDate: String
     roles: [Role]
 }
+
 type Role{
     _id: ID
     name: String!
 }
+
 type About{
     _id: ID
     name: String!
     about: String!
     createdDate: String!
+}
+
+type Promotion{
+    _id: ID
+    name: String!
+    description: String!
+    startDate: String!
+    endDate: String
 }
 
 type Token {
@@ -25,10 +35,13 @@ type Token {
 type Query{
     getAbout: About
     getCurrentUser: User
+    getAllPromotions: [Promotion]
+    getPromotion(_id:String!): Promotion
 }
 
 type Mutation{
     addAbout (name:String!, about: String! ): About
+    addPromotion (name:String!, description: String!, startDate: String, endDate:String): Promotion
     signupUser( fullname: String!, password: String!, email: String! ): Token
     signinUser( password: String!, email: String! ): Token
 }
