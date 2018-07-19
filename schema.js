@@ -24,6 +24,7 @@ type Token {
 
 type Query{
     getAbout: About
+    getCurrentUser: User
 }
 
 type Mutation{

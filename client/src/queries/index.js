@@ -27,3 +27,12 @@ mutation ($email: String!, $password: String!) {
     }
   }
 `;
+
+export const GET_CURRENT_USER = gql`
+query{
+  getCurrentUser {
+      fullname
+      email
+  }
+}
+`;

@@ -11,6 +11,19 @@ exports.resolvers = {
         getAbout: async (root, args, { About }) => {
             const oneAbout = await About.findOne();
             return oneAbout;
+        },
+        getCurrentUser: async (root, args, { currentUser, User }) => {
+            if (!currentUser) {
+                return null;
+            }
+
+            const user = await User.findOne({ email: currentUser.email })
+                .populate({
+                    path: 'roles',
+                    model: 'Role'
+                });
+
+                return user;
         }
     },
     Mutation: {
