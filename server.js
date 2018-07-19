@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
 require('dotenv').config({ path: 'variables.env' });
 
 const Role = require('./models/Role');
@@ -20,7 +21,7 @@ const schema = makeExecutableSchema({
 });
 
 mongoose
-    .connect(process.env.MONGO_URI,{useNewUrlParser: true })
+    .connect(process.env.MONGO_URI, { useNewUrlParser: true })
     .then(() => console.log('DB connected'))
     .catch(err => console.error(err));
 
@@ -30,6 +31,18 @@ const corsOptions = {
     credentials: true
 }
 app.use(cors(corsOptions));
+
+app.use(async (req, res, next) => {
+    const token = req.headers['authorization'];
+    if (token !== "null") {
+        try {
+            const currentUser = await jwt.verify(token, process.env.SECRET);
+        } catch (err) {
+            console.error(err);
+        }
+    }
+    next();
+});
 
 app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 app.use('/graphql', bodyParser.json(), graphqlExpress({
