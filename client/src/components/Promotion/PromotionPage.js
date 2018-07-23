@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Query } from 'react-apollo';
+import Error from '../Error';
 
 import { GET_PROMOTION } from '../../queries'
 
@@ -8,9 +9,9 @@ const PromotionPage = ({ match }) => {
     const { _id } = match.params;
     return (
         <Query query={GET_PROMOTION} variables={{ _id }}>
-            {(data, loading, error) => {
+            {({ data, loading, error }) => {
                 if (loading) return <div>Loading</div>
-                if (error) return <div>Error</div>
+                if (error) return <Error error={error} />
                 return (
                     <div className="App">
                         <h2>{data.getPromotion.name}</h2>

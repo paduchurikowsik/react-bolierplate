@@ -31,6 +31,7 @@ query($_id:ID!){
         description
         startDate
         endDate
+        createdDate
     }
 }
 `;
@@ -61,3 +62,15 @@ mutation ($email: String!, $password: String!) {
   }
 `;
 
+export const ADD_PROMOTION = gql`
+mutation ($name:String!, $description: String!, $startDate: String, $endDate:String) {
+  addPromotion(name: $name, description: $description, startDate:$startDate, endDate:$endDate) {
+      _id
+      name
+      description
+      startDate
+      endDate
+      createdDate
+    }
+  }
+`;

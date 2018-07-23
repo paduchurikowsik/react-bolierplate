@@ -26,6 +26,7 @@ type Promotion{
     description: String!
     startDate: String!
     endDate: String
+    createdDate: String!
 }
 
 type Token {
@@ -36,7 +37,7 @@ type Query{
     getAbout: About
     getCurrentUser: User
     getAllPromotions: [Promotion]
-    getPromotion(_id:String!): Promotion
+    getPromotion(_id:ID!): Promotion
 }
 
 type Mutation{

@@ -14,6 +14,10 @@ const PromotionSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    createdDate: {
+        type: Date,
+        default: Date.now
+    },
     endDate: {
         type: Date
     }

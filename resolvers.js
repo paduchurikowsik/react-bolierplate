@@ -16,6 +16,7 @@ exports.resolvers = {
             if (!currentUser) {
                 return null;
             }
+            console.log("got it");
             const promotion = await Promotion.findOne({ _id });
             return promotion;
         },
@@ -37,7 +38,9 @@ exports.resolvers = {
                 return null;
             }
 
-            const allPromotions = await Promotion.find();
+            const allPromotions = await Promotion.find().sort({
+                createdDate:'desc'
+            });
             return allPromotions;
 
 

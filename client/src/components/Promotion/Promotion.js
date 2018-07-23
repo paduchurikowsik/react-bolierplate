@@ -2,6 +2,7 @@ import React from 'react';
 import { Query } from 'react-apollo';
 import { GET_ALL_PROMOTIONS } from '../../queries';
 import PromotionItem from './PromotionItem';
+import { Link } from 'react-router-dom';
 
 const Promotion = () => {
     return (
@@ -14,11 +15,14 @@ const Promotion = () => {
                     return <div>Error</div>
                 }
                 return (
-                    <ul>
-                        {data.getAllPromotions.map(promotion => (
-                            <PromotionItem key={promotion._id} {...promotion} />
-                        ))}
-                    </ul>
+                    <div className="App">
+                        <ul>
+                            <li><Link to="/promotions/add"><button >Add Promotion</button></Link></li>
+                            {data.getAllPromotions.map(promotion => (
+                                <PromotionItem key={promotion._id} {...promotion} />
+                            ))}
+                        </ul>
+                    </div>
                 )
             }}
         </Query>
