@@ -39,7 +39,7 @@ exports.resolvers = {
             }
 
             const allPromotions = await Promotion.find().sort({
-                createdDate:'desc'
+                createdDate: 'desc'
             });
             return allPromotions;
 
@@ -51,11 +51,18 @@ exports.resolvers = {
             if (!currentUser) {
                 return null;
             }
+
+            const checkabout = await About.findOne();
+            if (checkabout) {
+                const updatedAbout = await About.findByIdAndUpdate(checkabout._id, { name, about }, { new: true });
+                return updatedAbout;
+            }
             const newAbout = await new About({
                 name,
                 about
             }).save();
 
+            console.log(newAbout);
             return newAbout;
         },
         addPromotion: async (root, { name, description, startDate, endDate }, { currentUser, Promotion }) => {

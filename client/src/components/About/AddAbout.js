@@ -1,15 +1,15 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Mutation } from 'react-apollo';
-import { ADD_PROMOTION, GET_ALL_PROMOTIONS } from '../../queries';
+import { ADD_ABOUT, GET_ABOUT } from '../../queries';
 import Error from '../Error';
 
 const initalState = {
     name: '',
-    description: ''
+    about: ''
 };
 
-class AddPromotion extends React.Component {
+class AddAbout extends React.Component {
     state = { ...initalState };
 
     clearState = () => {
@@ -28,43 +28,43 @@ class AddPromotion extends React.Component {
     }
 
     validateForm = () => {
-        const { name, description } = this.state;
-        const inInvalid = !name || !description;
+        const { name, about } = this.state;
+        const inInvalid = !name || !about;
 
         return inInvalid;
     };
 
-    handleSubmit = (event, addPromotion) => {
+    handleSubmit = (event, addAbout) => {
         event.preventDefault();
-        addPromotion().then(({ data }) => {
+        addAbout().then(({ data }) => {
             // console.log(data);
             this.clearState();
-            this.props.history.push('/promotions');
+            this.props.history.push('/');
         });
     };
 
     updateCache = (cache, { data }) => {
-        const { getAllPromotions } = cache.readQuery({ query: GET_ALL_PROMOTIONS });
-        const { addPromotion } = data;
+        const { getAbout } = cache.readQuery({ query: GET_ABOUT });
+        const { addAbout } = data;
         cache.writeQuery({
-            query: GET_ALL_PROMOTIONS,
+            query: GET_ABOUT,
             data: {
-                getAllPromotions: [addPromotion, ...getAllPromotions]
+                getAllPromotions: [addAbout, ...getAbout]
             }
         });
     };
 
     render() {
-        const { name, description } = this.state;
+        const { name, about } = this.state;
         return (
-            <Mutation mutation={ADD_PROMOTION} variables={{ name, description }} update={this.updateCache}>
-                {(addPromotion, { data, loading, error }) => {
+            <Mutation mutation={ADD_ABOUT} variables={{ name, about }} update={this.updateCache}>
+                {(addAbout, { data, loading, error }) => {
                     return (
                         <div className="App">
-                            <h2 className="App"> Add Promotion</h2>
-                            <form className="form" onSubmit={(event) => this.handleSubmit(event, addPromotion)}>
+                            <h2 className="App"> Add About</h2>
+                            <form className="form" onSubmit={(event) => this.handleSubmit(event, addAbout)}>
                                 <input type="text" name="name" placeholder="Name" onChange={this.handleChange} value={name} />
-                                <textarea type="text" name="description" placeholder="Description" onChange={this.handleChange} value={description} />
+                                <textarea type="text" name="about" placeholder="About" onChange={this.handleChange} value={about} />
                                 <button disabled={loading || this.validateForm()} type="submit" className="button-primary">Add</button>
                                 {error && <Error error={error} />}
                             </form>
@@ -77,4 +77,4 @@ class AddPromotion extends React.Component {
     }
 }
 
-export default withRouter(AddPromotion);
+export default withRouter(AddAbout);

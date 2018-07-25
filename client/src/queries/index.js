@@ -74,3 +74,14 @@ mutation ($name:String!, $description: String!, $startDate: String, $endDate:Str
     }
   }
 `;
+
+export const ADD_ABOUT = gql`
+mutation ($name:String!, $about: String!) {
+    addAbout ( name:$name, about: $about ) {
+      _id
+      name
+      about
+      createdDate
+    }
+  }
+`;
