@@ -45,5 +45,6 @@ type Mutation{
     addPromotion (name:String!, description: String!, startDate: String, endDate:String): Promotion
     signupUser( fullname: String!, password: String!, email: String! ): Token
     signinUser( password: String!, email: String! ): Token
+    deletePromotion(_id:ID!): Promotion
 }
 `;

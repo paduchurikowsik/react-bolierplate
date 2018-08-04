@@ -89,3 +89,18 @@ mutation ($name:String!, $about: String!) {
     }
   }
 `;
+
+
+export const DELETE_PROMOTION = gql`
+mutation ($_id:ID!) {
+  deletePromotion ( _id:$_id ) {
+    _id
+    name
+    description
+    startDate
+    endDate
+    createdDate
+    }
+  }
+`;
+

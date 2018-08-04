@@ -104,6 +104,13 @@ exports.resolvers = {
 
             return { token: createToken(user, process.env.SECRET, "1hr") };
 
-        }
+        },
+        deletePromotion: async (root, { _id }, { currentUser, Promotion }) => {
+            if (!currentUser) {
+                return null;
+            }
+            const promotion = await Promotion.findOneAndRemove({ _id });
+            return promotion;
+        },
     }
 };
