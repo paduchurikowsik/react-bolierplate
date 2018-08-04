@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { Mutation } from 'react-apollo';
 import { ADD_PROMOTION, GET_ALL_PROMOTIONS } from '../../queries';
 import Error from '../Error';
+import withAuth from '../withAuth';
 
 const initalState = {
     name: '',
@@ -77,4 +78,4 @@ class AddPromotion extends React.Component {
     }
 }
 
-export default withRouter(AddPromotion);
+export default withAuth(session => session && session.getCurrentUser)( withRouter(AddPromotion));

@@ -2,6 +2,8 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Query } from 'react-apollo';
 import Error from '../Error';
+import withAuth from '../withAuth';
+
 
 import { GET_PROMOTION } from '../../queries'
 
@@ -25,4 +27,5 @@ const PromotionPage = ({ match }) => {
     )
 }
 
-export default withRouter(PromotionPage);
+// export default withRouter(PromotionPage);
+export default withAuth(session => session && session.getCurrentUser)( withRouter(PromotionPage));

@@ -41,6 +41,10 @@ query{
   getCurrentUser {
       fullname
       email
+      roles {
+        _id
+        name
+      }
   }
 }
 `;

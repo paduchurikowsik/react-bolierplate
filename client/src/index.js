@@ -51,7 +51,7 @@ const Root = ({ refetch, session }) => (
                 <Route path="/signin" render={() => <Signin refetch={refetch} />} />
                 <Route path="/signup" render={() => <Signup refetch={refetch} />} />
                 <Route path="/about/add" render={() => <AddAbout session={session} />} />
-                <Route path="/profile" component={Profile} />
+                <Route path="/profile"  render={() => <Profile session={session} />} />
                 <Route path="/promotions" exact component={Promotion} />
                 <Route path="/promotions/add" render={() => <AddPromotion session={session} />} />
                 <Route path="/promotions/:_id" component={PromotionPage} />

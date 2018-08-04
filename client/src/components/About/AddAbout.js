@@ -3,6 +3,8 @@ import { withRouter } from 'react-router-dom';
 import { Mutation } from 'react-apollo';
 import { ADD_ABOUT, GET_ABOUT } from '../../queries';
 import Error from '../Error';
+import withAuth from '../withAuth';
+
 
 const initalState = {
     name: '',
@@ -77,4 +79,4 @@ class AddAbout extends React.Component {
     }
 }
 
-export default withRouter(AddAbout);
+export default withAuth(session => session && session.getCurrentUser)(withRouter(AddAbout));

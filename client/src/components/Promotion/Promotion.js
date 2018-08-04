@@ -3,6 +3,7 @@ import { Query } from 'react-apollo';
 import { GET_ALL_PROMOTIONS } from '../../queries';
 import PromotionItem from './PromotionItem';
 import { Link } from 'react-router-dom';
+import withAuth from '../withAuth';
 
 const Promotion = () => {
     return (
@@ -29,4 +30,4 @@ const Promotion = () => {
     )
 }
 
-export default Promotion;
+export default withAuth(session => session && session.getCurrentUser)(Promotion);
