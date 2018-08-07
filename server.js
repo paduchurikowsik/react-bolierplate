@@ -9,6 +9,7 @@ const Role = require('./models/Role');
 const User = require('./models/User');
 const About = require('./models/About');
 const Promotion = require('./models/Promotion');
+const CourseTour = require('./models/CourseTour');
 
 const { graphiqlExpress, graphqlExpress } = require('apollo-server-express');
 const { makeExecutableSchema } = require('graphql-tools');
@@ -54,7 +55,8 @@ app.use('/graphql', bodyParser.json(), graphqlExpress(({ currentUser }) => ({
         User,
         About,
         Promotion,
-        currentUser
+        CourseTour,
+        currentUser,
     }
 })
 )

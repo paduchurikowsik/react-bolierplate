@@ -20,6 +20,14 @@ exports.resolvers = {
             const promotion = await Promotion.findOne({ _id });
             return promotion;
         },
+        getCourseTour: async (root, { _id }, { currentUser, CourseTour }) => {
+            if (!currentUser) {
+                return null;
+            }
+            console.log("got it");
+            const courseTour = await CourseTour.findOne({ _id });
+            return courseTour;
+        },
         getCurrentUser: async (root, args, { currentUser, User }) => {
             if (!currentUser) {
                 return null;
@@ -42,6 +50,18 @@ exports.resolvers = {
                 createdDate: 'desc'
             });
             return allPromotions;
+
+
+        },
+        getAllCourseTours: async (root, args, { currentUser, CourseTour }) => {
+            if (!currentUser) {
+                return null;
+            }
+
+            const allCourseTours = await CourseTour.find().sort({
+                createdDate: 'desc'
+            });
+            return allCourseTours;
 
 
         }
@@ -78,6 +98,17 @@ exports.resolvers = {
 
             return newPromotion;
         },
+        addCourseTour: async (root, { name, description }, { currentUser, CourseTour }) => {
+            if (!currentUser) {
+                return null;
+            }
+            const newCourseTour = await new CourseTour({
+                name,
+                description
+            }).save();
+
+            return newCourseTour;
+        },
         signupUser: async (root, { fullname, email, password }, { User }) => {
             const user = await User.findOne({ email });
             if (user) {
@@ -111,6 +142,13 @@ exports.resolvers = {
             }
             const promotion = await Promotion.findOneAndRemove({ _id });
             return promotion;
+        },
+        deleteCourseTour: async (root, { _id }, { currentUser, CourseTour }) => {
+            if (!currentUser) {
+                return null;
+            }
+            const courseTour = await CourseTour.findOneAndRemove({ _id });
+            return courseTour;
         },
     }
 };

@@ -55,6 +55,9 @@ const Root = ({ refetch, session }) => (
                 <Route path="/promotions" exact component={Promotion} />
                 <Route path="/promotions/add" render={() => <AddPromotion session={session} />} />
                 <Route path="/promotions/:_id" component={PromotionPage} />
+                <Route path="/coursetours" exact component={Promotion} />
+                <Route path="/coursetours/add" render={() => <AddPromotion session={session} />} />
+                <Route path="/coursetours/:_id" component={PromotionPage} />
                 <Redirect to="/" />
             </Switch>
         </Fragment>

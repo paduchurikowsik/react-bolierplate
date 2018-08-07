@@ -29,6 +29,13 @@ type Promotion{
     createdDate: String!
 }
 
+type CourseTour{
+    _id: ID
+    name: String!
+    description: String!
+    createdDate: String!
+}
+
 type Token {
     token: String!
 }
@@ -38,13 +45,18 @@ type Query{
     getCurrentUser: User
     getAllPromotions: [Promotion]
     getPromotion(_id:ID!): Promotion
+    getAllCourseTours: [CourseTour]
+    getCourseTour(_id:ID!): CourseTour
 }
 
 type Mutation{
     addAbout (name:String!, about: String! ): About
     addPromotion (name:String!, description: String!, startDate: String, endDate:String): Promotion
+    deletePromotion(_id:ID!): Promotion
+    addCourseTour (name:String!, description: String!): CourseTour
+    deleteCourseTour(_id:ID!): CourseTour
     signupUser( fullname: String!, password: String!, email: String! ): Token
     signinUser( password: String!, email: String! ): Token
-    deletePromotion(_id:ID!): Promotion
+    
 }
 `;
